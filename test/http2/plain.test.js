@@ -1,6 +1,7 @@
 'use strict'
 
 const { test } = require('node:test')
+const http2 = require('node:http2')
 const Fastify = require('../..')
 const h2url = require('h2url')
 const msg = { hello: 'world' }
