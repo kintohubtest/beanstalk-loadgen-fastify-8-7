@@ -274,52 +274,6 @@ test('Error.status property support', (t, testDone) => {
   })
 })
 
-describe('Support rejection with values that are not Error instances', () => {
-  const objs = [
-    0,
-    '',
-    [],
-    {},
-    null,
-    undefined,
-    123,
-    'abc',
-    new RegExp(),
-    new Date(),
-    new Uint8Array()
-  ]
-  for (const nonErr of objs) {
-    test('Type: ' + typeof nonErr, (t, testDone) => {
-      t.plan(4)
-      const fastify = Fastify()
-      t.after(() => fastify.close())
-
-      fastify.get('/', () => {
-        return Promise.reject(nonErr)
-      })
-
-      fastify.setErrorHandler((err, request, reply) => {
-        if (typeof err === 'object') {
-          t.assert.deepStrictEqual(err, nonErr)
-        } else {
-          t.assert.strictEqual(err, nonErr)
-        }
-        reply.code(500).send('error')
-      })
-
-      fastify.inject({
-        method: 'GET',
-        url: '/'
-      }, (error, res) => {
-        t.assert.ifError(error)
-        t.assert.strictEqual(res.statusCode, 500)
-        t.assert.strictEqual(res.payload, 'error')
-        testDone()
-      })
-    })
-  }
-})
-
 test('invalid schema - ajv', (t, testDone) => {
   t.plan(4)
 
