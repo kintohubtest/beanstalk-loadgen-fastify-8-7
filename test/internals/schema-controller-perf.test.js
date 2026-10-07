@@ -1,6 +1,7 @@
 const { sep } = require('node:path')
 const { test } = require('node:test')
 const Fastify = require('../../fastify')
+const { kSchemaController } = require('../../lib/symbols')
 
 test('SchemaController are NOT loaded when the controllers are custom', async t => {
   const app = Fastify({
