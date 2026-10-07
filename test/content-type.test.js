@@ -1,6 +1,7 @@
 'use strict'
 
-const { test } = require('node:test')
+const { describe, test } = require('node:test')
+const ContentType = require('../lib/content-type')
 const Fastify = require('..')
 
 test('should remove content-type for setErrorHandler', async t => {
