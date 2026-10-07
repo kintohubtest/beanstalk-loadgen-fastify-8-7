@@ -121,7 +121,7 @@ declare namespace fastify {
     bodyLimit?: number,
     handlerTimeout?: number,
     maxParamLength?: number,
-    disableRequestLogging?: boolean,
+    disableRequestLogging?: boolean | ((req: FastifyRequest) => boolean),
     exposeHeadRoutes?: boolean,
     onProtoPoisoning?: ProtoAction,
     onConstructorPoisoning?: ConstructorAction,
